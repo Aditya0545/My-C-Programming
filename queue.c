@@ -1,69 +1,84 @@
-// Switch program for queue
 #include<stdio.h>
+#include<stdlib.h>
 #define MAX 5
-int que_arr[MAX];
-int added_item;
-int rear = -1;
-int front = -1;
-int main()
-{
-    push_all();
-    disp();
-    delete();
-    return 0;
-}
 
-void disp()
+int que[MAX];
+int front = -1;
+int rear = -1;
+int pushed_item;
+
+void insert()
 {
-    if(front == -1 || front > rear)
+    if (rear == (MAX-1))
     {
-        printf("\nQueue is empty");
+        printf("\nFull\n");
     }
     else
     {
-        int i;
-        printf("\nElements are: ");
-        for(i = front; i <= rear; ++i)
+        if (front == -1)
         {
-            printf("%d,", que_arr[i]);
-        }
-    }
-} 
-void push_all()
-{
-    int i;
-    {
-    if (rear == (MAX)-1)
-    {
-        printf("queue is full");
-    }
-    else if (front == -1)
             front = 0;
-        else
-            {
-                rear = rear+1;
-            }
-        for(i=0; i<MAX; i++)
-        {
-        printf("\nEnter the element: ");
-        scanf("%d", &added_item);
-        rear = rear + 1;
-        que_arr[rear] = added_item;
         }
+    printf("\nEnter the element: ");
+    scanf("%d", &pushed_item);
+    rear = rear + 1;
+    que[rear] = pushed_item;
     }
 }
+
 void delete()
+{
+    if ((front == -1) || (front > rear))
+    {
+        printf("\nEmpty\n");
+    }
+    else
+    {
+        printf("\nDeleted element is %d", que[front]);
+        front = front + 1;
+    }
+}
+
+void display()
 {
     if (front == -1 || front > rear)
     {
-        printf("Queue is empty");
+        printf("\nEmpty\n");
     }
     else
     {
-        int i;
-        printf("\nDeleted elements are: ");
-        front = 0;
-        for(i= front; i <= rear; i++)
-            printf("\nDeleted element are %d,",que_arr[i]);
+        printf("\nElements are: ");
+        for (int i = front; i <= rear; i++)
+        {
+            printf(" %d", que[i]);
+        }
     }
+}
+
+int main()
+{
+    int ch;
+    while (1)
+    {
+        printf("\n1. insert\n2. delete\n3. display\n4. exit\nEnter Your choice: ");
+        scanf("%d", &ch);
+        switch(ch)
+        {
+            case 1: insert();
+            break;
+
+            case 2: delete();
+            break;
+
+            case 3: display();
+            break;
+
+            case 4: exit(0);
+            break;
+
+            default: printf("\nInvalid Input\n");
+            break;
+        }
+    }
+    return 0;
 }

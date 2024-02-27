@@ -2,10 +2,11 @@
 int fact(int n)
 {
     int val = 1;
-    for (int i = n; i > 1; i--)
+    for (int i = n; i >= 1; i--)
     {
         val *= i;
     }
+    return val;
 }
 void main()
 {
